@@ -4,8 +4,11 @@ import hello.hellospring.demain.Member;
 import hello.hellospring.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
 
 @Controller
 public class MemberController {
@@ -31,5 +34,13 @@ public class MemberController {
         memberService.join(member);
         //이전 화면으로 전환(안드로이드의 finish()와 비슷한 느낌, 단 어디로 이동할지 정할 수 있는 듯)
         return "redirect:/";
+    }
+    @GetMapping("/members")
+    public String list(Model model){
+        //memberService에 있는 member들을 전부 model에 담아서 화면(View template)에 넘길 것임
+        List<Member> members = memberService.findMembers();
+        model.addAttribute("members", members);
+
+        return "members/memberList";
     }
 }
