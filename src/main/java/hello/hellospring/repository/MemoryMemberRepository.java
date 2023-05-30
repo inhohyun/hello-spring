@@ -2,9 +2,14 @@ package hello.hellospring.repository;
 
 
 import hello.hellospring.demain.Member;
+import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
+//정형화된 포지션
+//Controller에서 데이터를 받음
+//Service에서 비즈니스 로직을 만듦
+//Repository에서 데이터를 저장함
 
 public class MemoryMemberRepository implements MemberRepository{
     private static Map<Long, Member> store = new HashMap<>();
